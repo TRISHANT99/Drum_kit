@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <style>
+        .wow {
+            width: 250px;
+            border: 2px solid black;
+            display: block;
+            margin: auto;
+        }
+
+        .wow h1 {
+            display: flex;
+            justify-content: center;
+        }
+
+        .wow p {
+            display: flex;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .wow p span {
+            font-size: 25px;
+        }
+        .btn{
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wow">
+        <h1>StopWatch</h1>
+        <p class="timer"><span id="seconds">00</span>: <span id="milliseconds">00</span></p>
+        <div class="btn">
+            <button id="button-start">Start</button>
+            <button id="button-stop">Stop</button>
+            <button id="button-reset">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var seconds = 00;
+            var milliseconds = 00;
+            var appendmilliseconds = document.getElementById("milliseconds");
+            var appendseconds = document.getElementById("seconds");
+            var buttonStart = document.getElementById("button-start");
+            var buttonStop = document.getElementById("button-stop");
+            var buttonReset = document.getElementById("button-reset");
+            var Interval;
+
+            buttonStart.onclick = function () {
+                clearInterval(Interval);
+                Interval = setInterval(startTimer, 10);
+            }
+            buttonStop.onclick = function () {
+                clearInterval(Interval);
+            }
+            buttonReset.onclick = function () {
+                clearInterval(Interval);
+                milliseconds = "00";
+                seconds = "00";
+                appendmilliseconds.innerHTML = milliseconds;
+                appendseconds.innerHTML = seconds;
+            }
+            function startTimer() {
+                milliseconds++;
+                if (milliseconds <= 9) {
+                    appendmilliseconds.innerHTML = "0" + milliseconds;
+                }
+                if (milliseconds > 9) {
+                    appendmilliseconds.innerHTML = milliseconds;
+                }
+                if (milliseconds > 99) {
+                    seconds++;
+                    appendseconds.innerHTML = "0" + seconds;
+                    milliseconds = 0;
+                    appendmilliseconds.innerHTML = "0" + 0;
+                }
+                if (seconds > 9) {
+                    appendseconds.innerHTML = seconds;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
